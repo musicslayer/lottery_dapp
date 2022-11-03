@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>The Musicslayer Lottery</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/> 
+		<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+		<link rel="apple-touch-icon" type="image/png" href="favicon.png"/>
+	</head>
+
+	<body>
+		<h1>Welcome to the Musicslayer Lottery!</h1>
+		<img src="favicon.png" alt="Musicslayer Logo" style="width:32px;height:32px;">
+		
+		<h2><u>Contact</u></h2>
+		<a href="mailto:musicslayerX@proton.me">musicslayerX@proton.me</a>
+		
+		<br/><br/><br/>
+		
+		<h2><u>Available Networks</u></h2>
+		
+		<h3>Mainnets</h3>
+		<img src="bsc_logo.png" alt="Binance Smart Chain Logo" style="width:16px;height:16px;">
+		<a href="bsc_mainnet.html">Binance Smart Chain</a>
+		
+		<h3>Testnets</h3>
+		<img src="bsc_logo.png" alt="Binance Smart Chain Logo" style="width:16px;height:16px;">
+		<a href="bsc_testnet.html">Binance Smart Chain</a>
+		
+		<br/><br/><br/>
+		
+		<h2><u>Lottery Information</u></h2>
+		
+		<h3>Summary</h3>
+		<p>This lottery is a raffle game where players can purchase tickets with crypto coins in the hopes of winning a larger amount.</p>
+		
+		<h3>Networks</h3>
+		<p>The lottery has a separate contract for each network it is on. The rules of operation are the same from contract to contract, but specific details such as the owner address and the current ticket price may vary.</p>
+		<p>Lotteries on different networks progress independently and have completely separate prize pools from each other.</p>
+		
+		<h3>Costs</h3>
+		<p>Lottery tickets must be purchased at a fixed price in the network's native coin. The operator may change this price, but any changes will go into effect starting from the next lottery.</p>
+		<p>In addition, any transaction at all will require a gas fee, which must also be paid in the network's native coin.</p>
+		
+		<h3>How To Play</h3>
+		<p>The links above will take you to a dapp where you can purchase tickets for that network's lottery.</p>
+		<p>Alternatively, a player can send native coins to a lottery's contract address to purchase tickets, although care must be taken to ensure you are sending to the right address for the network the player is on. Since tickets must be purchased in whole number quantities, the contract will move any remaining coins to that player's claimable balance. The player will have to withdraw this balance themselves.</p>
+		<p style="color:#FF0000;"><b>Do not send any tokens to the contracts!</b></p>
+		
+		<h3>Ownership</h3>
+		<p>Each contract has an owner address and an operator address. These two addresses may or may not be the same.</p>
+		<ul>
+			<li>The owner's job is to perform fail-safe actions to respond to invalid contract states.</li>
+			<li>The operator's job is to take care of the day-to-day running of the lottery.</li>
+		</ul>
+		<p>Both of these roles may be reassigned independently, but the owner can also claim the role of operator at any time.</p>
+		
+		<h3>Prize Details</h3>
+		<p>There are two separate prize pools:</p>
+		<ul>
+			<li>The player prize pool is the sum of all the coins used to purchase tickets. 90% of this amount goes to the winner, and the remaining 10% is split between the owner and the operator.</li>
+			<li>The bonus prize pool is an optional amount that anyone can donate to in order to make the prize larger. 100% of this amount goes to the winner.</li>
+		</ul>
+		<p>Note that any funds that are owed to an address must be withdrawn by that address itself. The contract keeps track of any balances an address is owed but will not automatically initiate any balance transfers.</p>
+		
+		<h3>Randomness and Fairness</h3>
+		<p>In any lottery with more than one unique playing address, a ticket is chosen at random to decide the winner. Each ticket has an equal chance of being picked, so purchasing more tickets will give a player a higher chance of winning.</p>
+		<p>To ensure that the random aspect of the lottery cannot be manipulated, <a href="https://docs.chain.link/docs/vrf/v2/introduction/">Chainlink VRF</a> is used to supply the lottery contracts with random numbers.</p>
+		<p>In the unlikely event that Chainlink VRF experiences a temporary outage, a retry will be allowed after a certain amount of time. Once a winning ticket has been successfully drawn, retries are no longer allowed.</p>
+		
+		<h3>Decentralization</h3>
+		<p>The lottery contracts are designed so that no one, including the owner and the operator, may withdraw funds that they are not supposed to. In other words, the prize funds cannot be "rugged".</p>
+		<p>If the operator fails to run the lottery, players can perform the required operations themselves. This ensures that player coins can never be trapped in a perpetual lottery.</p>
+		
+		<h3>Refunds</h3>
+		<p>Generally, any coins spent in the lottery are nonrefundable. There is one exception, however: If a lottery is canceled, then all coins used to buy tickets for that lottery will be marked as refundable and able to be withdrawn.</p>
+		<p>In normal circumstances, the operator may pay a penalty fee to cancel the current lottery. If there is something wrong with the contract (see "Contract Corruption" section below), then anyone can cancel the lottery without paying a penalty fee.</p>
+		
+		<h3>Contract Corruption</h3>
+		<p>In extremely rare situations, a fail-safe mechanism called "contract corruption" may be triggered, either automatically or with intervention from the owner. This is designed to make sure that the contract is not trapped in an invalid state. Some potential causes of contract corruption are:</p>
+		<ul>
+			<li>multiple tries in a row where Chainlink VRF fails to return a random number.</li>
+			<li>a severe increase in the average block time of the blockchain.</li>
+			<li>a "zombie" lottery that has gone on for too long.</li>
+		</ul>
+		<p>If a contract is marked as corrupt, then there will be a grace period where everyone can withdraw any coins they have before the owner is allowed to self-destruct the contract. In addition, anyone can cancel the current lottery to make sure coins used to purchase tickets are refunded.</p>
+		<p>To prevent further coin losses, a corrupt contract will make any attempts to purchase tickets or donate to the bonus prize pool fail.</p>
+	</body>
+</html>
