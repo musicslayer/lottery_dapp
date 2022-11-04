@@ -21,7 +21,7 @@
 		}
 		
 		function getContractAddress() {
-			return "0x83e7399bD99AF736820ee5e425f3419C79507a06";
+			return "0xB53dee16Fd7aDCFd3C0cecCD33B380AD8662f065";
 		}
 		
 		function getExplorerBaseUrl() {
@@ -29,7 +29,7 @@
 		}
 		
 		async function getContractJSON() {
-			let jsonData = await fetch("bsc_testnet_contract.json");
+			let jsonData = await fetch("bsc_testnet_contract_abi.json");
 			return await jsonData.json();
 		}
 	</script>
